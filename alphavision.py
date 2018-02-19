@@ -24,7 +24,7 @@ def print_cool_text():
     print "                                        |_|                \n\n"
 
 
-def recognize_people(ip=False): #facerec_from_camera_faster.py
+def recognize_people(ip=False):
     if ip:
         print "Usage guide:"
         print "\n 1) Type in the ip of destination"
@@ -41,7 +41,6 @@ def recognize_people(ip=False): #facerec_from_camera_faster.py
         video_capture = cv2.VideoCapture(0)
     # Load a sample picture and learn how to recognize it.
 
-    #isimleri jsona sokma şekliyle koydum buraya. henüz veritabanından veri çekmeyi yapacak vaktim olmadı. ve türkçe karakter.
     obama_image = face_recognition.load_image_file("users/Barrack Obama.jpg")
     obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
     ferhat_image = face_recognition.load_image_file("users/Ferhat Eren Bastug.jpg")
@@ -56,7 +55,6 @@ def recognize_people(ip=False): #facerec_from_camera_faster.py
     husnumert_face_encoding = face_recognition.face_encodings(husnumert_image)[0]
 
     
-    # Initialize some variables
     face_locations = []
     face_encodings = []
     face_names = []
@@ -126,7 +124,7 @@ def recognize_people(ip=False): #facerec_from_camera_faster.py
         # Display the resulting image
         cv2.imshow('Video', frame)
 
-        # Hit 'q' on the keyboard to quit!
+        # Hit 'q' on the keyboard to quit.
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -135,7 +133,7 @@ def recognize_people(ip=False): #facerec_from_camera_faster.py
     cv2.destroyAllWindows()
 
 
-def add_user(): #pycamera.py (db automated) + db functions
+def add_user():
     camera_port = 0
     camera = cv2.VideoCapture(camera_port)
     time.sleep(1)
