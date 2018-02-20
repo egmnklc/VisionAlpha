@@ -41,18 +41,23 @@ def recognize_people(ip=False):
         video_capture = cv2.VideoCapture(0)
     # Load a sample picture and learn how to recognize it.
 
-    obama_image = face_recognition.load_image_file("users/Barrack Obama.jpg")
-    obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
-    ferhat_image = face_recognition.load_image_file("users/Ferhat Eren Bastug.jpg")
-    ferhat_face_encoding = face_recognition.face_encodings(ferhat_image)[0]
-    ege_image = face_recognition.load_image_file("users/Ege Gunal.jpg")
-    ege_face_encoding = face_recognition.face_encodings(ege_image)[0]
-    egemen_image = face_recognition.load_image_file("users/Egemen Kilic.jpg")
-    egemen_face_encoding = face_recognition.face_encodings(egemen_image)[0]
-    ates_image = face_recognition.load_image_file("users/Ates Fettahoglu.jpg")
-    ates_face_encoding = face_recognition.face_encodings(ates_image)[0]
-    husnumert_image = face_recognition.load_image_file("users/Husnumert Uygun.jpg")
-    husnumert_face_encoding = face_recognition.face_encodings(husnumert_image)[0]
+    data = fetch_users_table()
+    known_face_names, usr_path = skim_dict(data, "name"), skim_dict(data, "path")
+
+    known_face_encodings = [face_recognition.face_encodings(face_recognition.load_image_file(usr_im)[0]) for usr_im in usr_path]
+
+    #obama_image = face_recognition.load_image_file("users/Barrack Obama.jpg")
+    #obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+    #ferhat_image = face_recognition.load_image_file("users/Ferhat Eren Bastug.jpg")
+    #ferhat_face_encoding = face_recognition.face_encodings(ferhat_image)[0]
+    #ege_image = face_recognition.load_image_file("users/Ege Gunal.jpg")
+    #ege_face_encoding = face_recognition.face_encodings(ege_image)[0]
+    #egemen_image = face_recognition.load_image_file("users/Egemen Kilic.jpg")
+    #egemen_face_encoding = face_recognition.face_encodings(egemen_image)[0]
+    #ates_image = face_recognition.load_image_file("users/Ates Fettahoglu.jpg")
+    #ates_face_encoding = face_recognition.face_encodings(ates_image)[0]
+    #husnumert_image = face_recognition.load_image_file("users/Husnumert Uygun.jpg")
+    #husnumert_face_encoding = face_recognition.face_encodings(husnumert_image)[0]
 
     
     face_locations = []
@@ -79,27 +84,13 @@ def recognize_people(ip=False):
             face_names = []
             for face_encoding in face_encodings:
                 # See if the face is a match for the known face(s)
-                match = face_recognition.compare_faces([obama_face_encoding,
-                                                        ferhat_face_encoding,
-                                                        ege_face_encoding,
-                                                        egemen_face_encoding,
-                                                        ates_face_encoding,
-                                                        husnumert_face_encoding], face_encoding, tolerance = 0.5)
+                match = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance = 0.5)
                 name = "Unknown"
-                if match[0]:
-                    name = "Barack"
-                elif match[1]:
-                    name = "Ferhat"
-                elif match[2]:
-                    name = "Ege"
-                elif match[3]:
-                    name = "Egemen"
-                elif match[4]:
-                    name = "Ates"
-                elif match[5]:
-                    name = "Husnumert"
+                if True in match:
+                    match_index = match.index(True)
+                    name = known_face_names[match_index]
+                
                 print(name + " " + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' logged in.')
-
                 face_names.append(name)
 
         process_this_frame = not process_this_frame
@@ -198,7 +189,18 @@ def select_user(id):
         json_file.close()
     return data[id]["name"]
 
-def run_loop(): #run program
+def fetch_users_table():
+    with open(db_location, "r") as json_file:
+        data = json.load(json_file)
+        json_file.close()
+    return data
+
+def skim_dict(data, param):
+    size = len(data)
+    skimmed = [data[val][param] for val in data]
+    return skimmed
+
+def run_loop(): #main program
     print_cool_text()
     looper = True
     while looper:
@@ -222,4 +224,5 @@ def run_loop(): #run program
         elif usr_in == "6":
             looper = False
 
+#run the program
 run_loop()
