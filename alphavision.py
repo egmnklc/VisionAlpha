@@ -31,7 +31,6 @@ def recognize_people(ip=False):
         print " 2) Put in the port number, if none, hit enter."
         print " 3) Type the username that you use to log in with."
         print " 4) Type the password that you use to log in with.\n"
-        # Get a reference to webcam #0 (the default one)
         camera_ip = raw_input(" 1) Ip of destination camera:")
         port_number = raw_input(" 2) Port Number:")
         user_name = raw_input(" 3) Username asked for authentication:")
@@ -43,8 +42,7 @@ def recognize_people(ip=False):
 
     data = fetch_users_table()
     known_face_names, usr_path = skim_dict(data, "name"), skim_dict(data, "path")
-
-    known_face_encodings = [face_recognition.face_encodings(face_recognition.load_image_file(usr_im)[0]) for usr_im in usr_path]
+    known_face_encodings = [face_recognition.face_encodings(face_recognition.load_image_file(usr_im))[0] for usr_im in usr_path]
 
     #obama_image = face_recognition.load_image_file("users/Barrack Obama.jpg")
     #obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
@@ -91,7 +89,7 @@ def recognize_people(ip=False):
                     name = known_face_names[match_index]
                 
                 print(name + " " + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' logged in.')
-                face_names.append(name)
+                face_names.append((name.split(" ")[0]))
 
         process_this_frame = not process_this_frame
 
@@ -200,10 +198,9 @@ def skim_dict(data, param):
     skimmed = [data[val][param] for val in data]
     return skimmed
 
-def run_loop(): #main program
-    print_cool_text()
-    looper = True
-    while looper:
+def run_program(): #main program
+    print_cool_text()   
+    while True:
         print "Press 1 for face recognition from your camera,"
         print "Press 2 for face recognition from ip camera,"
         print "Press 3 to print user database,"
@@ -222,7 +219,8 @@ def run_loop(): #main program
         elif usr_in == "5":
             delete_user()
         elif usr_in == "6":
-            looper = False
+            print "Goodbye!"
+            break
 
 #run the program
-run_loop()
+run_program()
