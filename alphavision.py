@@ -190,7 +190,7 @@ def run_program(): #main program
         print "Press 1 for face recognition from your camera,"
         print "Press 2 for face recognition from ip camera,"
         print "Press 3 to print user database,"
-        print "Press 3 to add new user,"
+        print "Press 4 to add new user,"
         print "Press 5 to remove a pre-existing user,"
         print "Press 6 to quit"
         usr_in = raw_input()
