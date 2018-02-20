@@ -38,25 +38,11 @@ def recognize_people(ip=False):
         video_capture = cv2.VideoCapture("http://"+user_name+":"+user_password+"@"+camera_ip+":"+port_number+"/video")
     else:
         video_capture = cv2.VideoCapture(0)
+        
     # Load a sample picture and learn how to recognize it.
-
     data = fetch_users_table()
     known_face_names, usr_path = skim_dict(data, "name"), skim_dict(data, "path")
     known_face_encodings = [face_recognition.face_encodings(face_recognition.load_image_file(usr_im))[0] for usr_im in usr_path]
-
-    #obama_image = face_recognition.load_image_file("users/Barrack Obama.jpg")
-    #obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
-    #ferhat_image = face_recognition.load_image_file("users/Ferhat Eren Bastug.jpg")
-    #ferhat_face_encoding = face_recognition.face_encodings(ferhat_image)[0]
-    #ege_image = face_recognition.load_image_file("users/Ege Gunal.jpg")
-    #ege_face_encoding = face_recognition.face_encodings(ege_image)[0]
-    #egemen_image = face_recognition.load_image_file("users/Egemen Kilic.jpg")
-    #egemen_face_encoding = face_recognition.face_encodings(egemen_image)[0]
-    #ates_image = face_recognition.load_image_file("users/Ates Fettahoglu.jpg")
-    #ates_face_encoding = face_recognition.face_encodings(ates_image)[0]
-    #husnumert_image = face_recognition.load_image_file("users/Husnumert Uygun.jpg")
-    #husnumert_face_encoding = face_recognition.face_encodings(husnumert_image)[0]
-
     
     face_locations = []
     face_encodings = []
