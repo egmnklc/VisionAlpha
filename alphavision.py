@@ -1,4 +1,4 @@
-﻿from pprint import pprint
+from pprint import pprint
 from time import gmtime, strftime
 import face_recognition
 import time
@@ -27,10 +27,10 @@ def print_cool_text():
 def recognize_people(ip=False):
     if ip:
         print "Usage guide:"
-        print "\n 1) Type in the ip of destination"
-        print "\n 2) Put in the port number, if none, hit enter."
-        print "\n 3) Type the username that you use to log in with."
-        print "\n 4) Type the password that you use to log in with.\n"
+        print " 1) Type in the ip of destination"
+        print " 2) Put in the port number, if none, hit enter."
+        print " 3) Type the username that you use to log in with."
+        print " 4) Type the password that you use to log in with.\n"
         # Get a reference to webcam #0 (the default one)
         camera_ip = raw_input(" 1) Ip of destination camera:")
         port_number = raw_input(" 2) Port Number:")
@@ -202,7 +202,12 @@ def run_loop(): #run program
     print_cool_text()
     looper = True
     while looper:
-        print("Press 1 for face recognition from your camera,\n Press 2 for face recognition from ip camera\nPress 3 to print user database,\nPress 3 to add new user\nPress 5 to remove a pre-existing user\nPress 6 to quit")
+        print "Press 1 for face recognition from your camera,"
+        print "Press 2 for face recognition from ip camera,"
+        print "Press 3 to print user database,"
+        print "Press 3 to add new user,"
+        print "Press 5 to remove a pre-existing user,"
+        print "Press 6 to quit"
         usr_in = raw_input()
         if usr_in == "1":
             recognize_people(False)
