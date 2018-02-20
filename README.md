@@ -4,7 +4,7 @@
 ---
 
 <h1 id="welcome-to-visionalpha-by-cru-team">Welcome to VisionAlpha by Cru Team!</h1>
-<p>This is a face recognition app created by Cru Team. That program also provides Command Line Interface.</p>
+<p>This is a face recognition application created by Cru Team. That program also provides Command Line Interface.</p>
 <ol>
 <li>Option 1: Face recognition from your camera</li>
 <li>Option 2: Face recognition from ip camera</li>
