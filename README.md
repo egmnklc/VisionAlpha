@@ -1,5 +1,4 @@
 <h1 id="welcome-to-visionalpha-by-cru-team">Welcome to VisionAlpha by Cru Team!</h1>
-<div style = "text-align:justify;">
 <p>&nbsp;&nbsp;This is a face recognition application created by Cru Team and powered by cv2 and face_recognition. That program also provides Command Line Interface.</p>
 <ol>
   <h2>What does this project do?</h2>
@@ -33,5 +32,4 @@
 <h1 id="example">A screenshot from project</h1>
 <p><img src="https://github.com/hmertuygun/VisionAlpha/blob/master/example.jpg?raw=true" alt="enter image description here"></p>
 <sup><i>The screenshot is from option 2, which recognizes faces from decided laptop camera.</i></sup>
-</div>
 
