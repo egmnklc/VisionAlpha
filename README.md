@@ -3,12 +3,15 @@
 <ol>
   <h2>What does this project do?</h2>
   <p>  VisionAlpha is designed to recognize faces from a laptop or ip camera. Delay is reduced as much as possible for the best results. Here are some options that you can decide on VisionAlpha</p>
+<div align = "center">
 <li>Option 1: Face recognition from your camera.</li>
 <li>Option 2: Face recognition from ip camera.</li>
 <li>Option 3: Print user database.</li>
 <li>Option 4: Add new user.</li>
 <li>Option 5: Remove a pre-existing user.</li>
 <li>Option 6: Quit.</li>
+</div>
+ 
    <h1>Here are some information about how AlphaVision works</h1>
   <p>Alpha uses is powered by face_recgnition and cv2 modules. It's currently working perfectly on Python 2.7.14.</p>
     <br>
