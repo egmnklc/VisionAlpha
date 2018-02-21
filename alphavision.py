@@ -25,6 +25,7 @@ def print_cool_text():
 
 
 def recognize_people(ip=False):
+    #The program combines the
     if ip:
         print "Usage guide:"
         print " 1) Type in the ip of destination"
@@ -34,21 +35,24 @@ def recognize_people(ip=False):
         camera_ip = raw_input(" 1) Ip of destination camera:")
         port_number = raw_input(" 2) Port Number:")
         user_name = raw_input(" 3) Username asked for authentication:")
-        user_password = raw_input(" 4) Password asked for the authorization:")                                           
-        video_capture = cv2.VideoCapture("http://"+user_name+":"+user_password+"@"+camera_ip+":"+port_number+"/video")
+        user_password = raw_input(" 4) Password asked for the authorization:")
+        stream_link = raw_input( "5) Live stream link of the camera:")
+        video_capture = cv2.VideoCapture("http://"+user_name+":"+user_password+"@"+camera_ip+":"+port_number+"/"+stream_link)
+        #Sums up the given information like
     else:
+        #Default port of a built-in laptop camera is 0.
         video_capture = cv2.VideoCapture(0)
-        
+
     # Load a sample picture and learn how to recognize it.
     data = fetch_users_table()
     known_face_names, usr_path = skim_dict(data, "name"), skim_dict(data, "path")
     known_face_encodings = [face_recognition.face_encodings(face_recognition.load_image_file(usr_im))[0] for usr_im in usr_path]
-    
+
     face_locations = []
     face_encodings = []
     face_names = []
     process_this_frame = True
-    
+
     while True:
         # Grab a single frame of video
         ret, frame = video_capture.read()
@@ -73,7 +77,7 @@ def recognize_people(ip=False):
                 if True in match:
                     match_index = match.index(True)
                     name = known_face_names[match_index]
-                
+
                 print(name + " " + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' logged in.')
                 face_names.append((name.split(" ")[0]))
 
@@ -96,29 +100,30 @@ def recognize_people(ip=False):
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
-        # Display the resulting image
+        # Display video_capture.
         cv2.imshow('Video', frame)
 
-        # Hit 'q' on the keyboard to quit.
+        # Hit 'q' on keyboard to quit.
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    # Release handle to the webcam
+    # Release the webcam
     video_capture.release()
     cv2.destroyAllWindows()
 
 
-def add_user():
-    camera_port = 0
-    camera = cv2.VideoCapture(camera_port)
-    time.sleep(1)
+def add_user(camera_port=0):
+    #Since the default camera port is 0 for the laptop, the program terminates the laptop camera to take a photo.
+    #It then asks for the name of the photo. Then, automatically adds .jpg extenion to make it work with the face recognition.
+    camera = cv2.VideoCapture(camera_port)#Port is assigned as 0.
+    time.sleep(1)#There is a 1 second sleep for the camera, because less will cause a black photo.(Camera takes the photo really fast, that's why.)
     return_value, image = camera.read()
-    name = raw_input("User's Name: ")
-    path = "users/" + name + ".jpg"
-    cv2.imwrite(path, image)
-    del(camera)
-    db_add_user(name, path)
-    
+    name = raw_input("User's Name: ")#Asks for the username.
+    path = "users/" + name + ".jpg"#Saves the photo in the VisionAlpha-master/users file with the .jpg extension
+    cv2.imwrite(path, image)#writes the image and the path.
+    del(camera)#Deletes the camera procss.
+    db_add_user(name, path)#Saves the given information to people.json file.
+
 #db functions
 def db_add_user(name, path):
     with open(db_location, "r") as json_file:
@@ -165,7 +170,7 @@ def delete_user(id=-1):
             print("Delete successful.")
         else:
             print("Operation canceled")
-    
+
 
 def select_user(id):
     with open(db_location, "r") as json_file:
@@ -180,22 +185,21 @@ def fetch_users_table():
     return data
 
 def skim_dict(data, param):
-    size = len(data)
     skimmed = [data[val][param] for val in data]
     return skimmed
 
-def run_program(): #main program
-    print_cool_text()   
+def run_program(): #The main part where it asks you to choose an option, the terminates the assigned process.
+    print_cool_text()
     while True:
-        print "Press 1 for face recognition from your camera,"
-        print "Press 2 for face recognition from ip camera,"
-        print "Press 3 to print user database,"
-        print "Press 4 to add new user,"
-        print "Press 5 to remove a pre-existing user,"
-        print "Press 6 to quit"
+        print "Option 1: Face recognition from your camera,"
+        print "Option 2: Face recognition from ip camera,"
+        print "Option 3: Print user database,"#Prints out people.json.
+        print "Option 4: Add new user,"#Adds user to people.json.
+        print "Option 5: Remove a pre-existing user,"#Removes person from people.json.
+        print "Option 6: Quit"#Quits the program.
         usr_in = raw_input()
         if usr_in == "1":
-            recognize_people(False)
+            recognize_people()
         elif usr_in == "2":
             recognize_people(True)
         elif usr_in == "3":
@@ -206,7 +210,7 @@ def run_program(): #main program
             delete_user()
         elif usr_in == "6":
             print "Goodbye!"
-            break
+            sys.exit()
 
 #run the program
 run_program()
