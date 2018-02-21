@@ -2,7 +2,7 @@
 <p>&nbsp;&nbsp;This is a face recognition application created by Cru Team and powered by cv2 and face_recognition. That program also provides Command Line Interface.</p>
 <ol>
   <h2>What does this project do?</h2>
-  <p align = "center">VisionAlpha is designed to recognize faces from a laptop or ip camera. Delay is reduced as much as possible for the best results. Here are some options that you can decide on VisionAlpha</p>
+  <p>VisionAlpha is designed to recognize faces from a laptop or ip camera. Delay is reduced as much as possible for the best results. Here are some options that you can decide on VisionAlpha</p>
 <li>Option 1: Face recognition from your camera.</li>
 <li>Option 2: Face recognition from ip camera.</li>
 <li>Option 3: Print user database.</li>
