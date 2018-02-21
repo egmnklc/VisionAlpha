@@ -1,12 +1,5 @@
-<head>
-<style>
-  .main{
-  text-align:justify;
-  }
-</style>
-  </head>
 <h1 id="welcome-to-visionalpha-by-cru-team">Welcome to VisionAlpha by Cru Team!</h1>
-<div class = "main">
+<div style = "text-align:justify;">
 <p>&nbsp;&nbsp;This is a face recognition application created by Cru Team and powered by cv2 and face_recognition. That program also provides Command Line Interface.</p>
 <ol>
   <h2>What does this project do?</h2>
