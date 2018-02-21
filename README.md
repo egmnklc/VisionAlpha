@@ -31,5 +31,5 @@
 </ol>
 <h1 id="example">A screenshot from project</h1>
 <p><img src="https://github.com/hmertuygun/VisionAlpha/blob/master/example.jpg?raw=true" alt="enter image description here"></p>
-<sup><b>The screenshot is from option 2, which recognizes faces from decided laptop camera.</b></sup>
+<sup><i>The screenshot is from option 2, which recognizes faces from decided laptop camera.</i></sup>
 
