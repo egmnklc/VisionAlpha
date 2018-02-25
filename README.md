@@ -10,7 +10,7 @@
 <li>Option 5: Remove a pre-existing user.</li>
 <li>Option 6: Quit.</li> 
    <h1 align = "center">Here are some information about AlphaVision.</h1>
-  <p>VisionAlpha is powered by face_recgnition and cv2 modules. It's currently working perfectly on Python 2.7.14.</p>
+  <p>VisionAlpha is powered by face_recognition and cv2 modules. It's currently working perfectly on Python 2.7.14.</p>
     <br>
     <h2>What does the options do?</h2>
   <h3>Option 1</h3>
@@ -32,4 +32,5 @@
 <h1 id="example">A screenshot from project</h1>
 <p><img src="https://github.com/hmertuygun/VisionAlpha/blob/master/example.jpg?raw=true" alt="enter image description here"></p>
 <sup><i>The screenshot is from option 2, which recognizes faces from decided laptop camera.</i></sup>
-
+<h1>Upcoming Updates</h1>
+<p>>>VisionAlpha will be able to crop and save the unknown images for maximum security.</p>
